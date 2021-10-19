@@ -16,6 +16,15 @@ class BookRepository {
         return em.find(Book::class.java, id)
     }
 
+    fun findNameBook(name: String): Book? {
+        val query = em.createQuery("SELECT book FROM Book book WHERE book.name = :name")
+        query.setParameter("name", name)
+
+        val list = query.resultList as List<Book>
+
+        return if (list.isEmpty()) null else list[0]
+    }
+
     fun update(book: Book) {
         em.merge(book)
     }
