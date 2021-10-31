@@ -1,4 +1,4 @@
-package co.edu.eam.disenosoftware.libreria.modelos
+package co.edu.eam.disenosoftware.libreria.modelos.entities
 
 import javax.persistence.Entity
 import javax.persistence.Table
@@ -16,17 +16,17 @@ data class Borrow(
 
     @Id
     @Column(name = "id")
-    val id: Int,
+    var id: Int,
 
     @Column(name = "borrow_date")
     var dateTime: Date,
 
     @ManyToOne
     @JoinColumn(name = "book_id")
-    val book: Book,
+    var book: Book,
 
     @ManyToOne
     @JoinColumn(name = "user_id")
-    val user: User,
+    var user: User,
 
-):Serializable
+    ):Serializable

@@ -1,4 +1,4 @@
-package co.edu.eam.disenosoftware.libreria.modelos
+package co.edu.eam.disenosoftware.libreria.modelos.entities
 
 import javax.persistence.Entity
 import javax.persistence.Table
