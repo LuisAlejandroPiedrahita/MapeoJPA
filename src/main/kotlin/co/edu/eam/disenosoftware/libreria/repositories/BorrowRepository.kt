@@ -1,6 +1,7 @@
 package co.edu.eam.disenosoftware.libreria.repositories
 
 import co.edu.eam.disenosoftware.libreria.modelos.Book
+import co.edu.eam.disenosoftware.libreria.modelos.User
 import co.edu.eam.disenosoftware.libreria.modelos.Borrow
 import org.springframework.beans.factory.annotation.Autowired
 import javax.persistence.EntityManager
@@ -41,5 +42,11 @@ class BorrowRepository {
         query.setParameter("code_book", id)
 
         return query.resultList as List<Borrow>
+    }
+
+    fun findUserByBook(codigo:String):List<User>{
+        val query= em.createQuery("SELECT borrow.user FROM Borrow borrow WHERE borrow.book.codigo =: codigoLibro")
+        query.setParameter("codigoLibro",codigo)
+        return query.resultList as List<User>
     }
 }

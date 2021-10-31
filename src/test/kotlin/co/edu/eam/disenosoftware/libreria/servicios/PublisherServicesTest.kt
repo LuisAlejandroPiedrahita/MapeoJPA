@@ -20,14 +20,28 @@ class PublisherServicesTest {
     lateinit var entityManager: EntityManager
 
     @Test
-    fun testCreatePublisherByCode() {
-        entityManager.persist(Publisher(1, "Santillana"))
+    fun testCreatePublisher() {
+        val publisherOne = Publisher(1, "Santillana")
+        entityManager.persist(publisherOne)
+        val publisherTwo = Publisher(1, "Norma")
         try {
-            publisherServices.createPublisher(Publisher(1, "Santillana"))
+            publisherServices.createPublisher(publisherTwo)
             Assertions.fail()
         } catch (e: BusinessException) {
             Assertions.assertEquals("This Publisher already exists", e.message)
         }
     }
 
+    @Test
+    fun createPublisherHappyPath(){
+        val publisherOne = Publisher(1, "Santillana")
+        entityManager.persist(publisherOne)
+        val publisherTwo = Publisher(1, "Norma")
+
+        publisherServices.createPublisher(publisherTwo)
+        val publisher= entityManager.find(Publisher::class.java,publisherTwo.code)
+        Assertions.assertNotNull(publisher)
+
+        Assertions.assertEquals("Norma",publisher.name)
+    }
 }

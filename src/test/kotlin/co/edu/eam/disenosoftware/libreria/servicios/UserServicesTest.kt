@@ -21,13 +21,27 @@ class UserServicesTest {
 
     @Test
     fun testCreateUserCode() {
-        entityManager.persist(User("3", "pablo", "perez"))
+        val userOne = User("111","pablo","perez")
+        entityManager.persist(userOne)
+        val userTwo = User("222","Luna","Martinez")
         try {
-            userServices.createUser(User("3", "pablo", "perez"))
+            userServices.createUser(userTwo)
             Assertions.fail()
         } catch (e: BusinessException) {
             Assertions.assertEquals("This User already exists", e.message)
         }
     }
 
+    @Test
+    fun createUserHappyPath(){
+        val userOne = User("111","pablo","perez")
+        entityManager.persist(userOne)
+        val userTwo = User("222","Luna","Martinez")
+
+        userServices.createUser(userTwo)
+        val user = entityManager.find(User::class.java,userTwo.identification)
+        Assertions.assertNotNull(user)
+        Assertions.assertEquals("Luna",user.name)
+        Assertions.assertEquals("Martinez",user.lastName)
+    }
 }

@@ -13,9 +13,6 @@ class AuthorServices {
     @Autowired
     lateinit var authorRepository: AuthorRepository
 
-    @Autowired
-    lateinit var entityManager: EntityManager
-
     fun createAuthor(author: Author) {
         val authorById = authorRepository.find(author.id)
 

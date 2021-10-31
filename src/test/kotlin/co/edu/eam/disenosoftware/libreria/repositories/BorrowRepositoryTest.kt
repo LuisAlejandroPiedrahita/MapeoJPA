@@ -23,11 +23,11 @@ class BorrowRepositoryTest {
     lateinit var entityManager: EntityManager
 
     @Test
-    fun testCreatePerson() {
+    fun testCreate() {
         val publisher = Publisher(1,"Santillana")
         entityManager.persist(publisher)
 
-        val book = Book("1","EstrellasFeas","123",publisher)
+        val book = Book("1","EstrellasFeas","123",10,publisher)
         entityManager.persist(book)
 
         val user = User("1", "luis","gomez")
@@ -50,7 +50,7 @@ class BorrowRepositoryTest {
         val publisher = Publisher(1,"Santillana")
         entityManager.persist(publisher)
 
-        val book = Book("1","EstrellasFeas","123",publisher)
+        val book = Book("1","EstrellasFeas","123",10,publisher)
         entityManager.persist(book)
 
         val user = User("1", "luis","gomez")
@@ -71,7 +71,7 @@ class BorrowRepositoryTest {
         val publisher = Publisher(1,"Santillana")
         entityManager.persist(publisher)
 
-        val book = Book("1","EstrellasFeas","123",publisher)
+        val book = Book("1","EstrellasFeas","123",10,publisher)
         entityManager.persist(book)
 
         val user = User("1", "luis","gomez")
@@ -92,7 +92,7 @@ class BorrowRepositoryTest {
         val publisher = Publisher(1,"Santillana")
         entityManager.persist(publisher)
 
-        val book = Book("1","EstrellasFeas","123",publisher)
+        val book = Book("1","EstrellasFeas","123",10,publisher)
         entityManager.persist(book)
 
         val user = User("1", "luis","gomez")
@@ -122,8 +122,8 @@ class BorrowRepositoryTest {
         entityManager.persist(publisher)
         entityManager.persist(publisher2)
 
-        val book1 = Book("1","EstrellasFeas","123",publisher)
-        val book2 = Book("2","EstrellasLindas","456",publisher2)
+        val book1 = Book("1","EstrellasFeas","123",10,publisher)
+        val book2 = Book("2","EstrellasLindas","456",10,publisher2)
         entityManager.persist(book1)
         entityManager.persist(book2)
 
@@ -151,8 +151,8 @@ class BorrowRepositoryTest {
         entityManager.persist(publisher)
         entityManager.persist(publisher2)
 
-        val book1 = Book("1","EstrellasFeas","123",publisher)
-        val book2 = Book("2","EstrellasLindas","456",publisher2)
+        val book1 = Book("1","EstrellasFeas","123",10,publisher)
+        val book2 = Book("2","EstrellasLindas","456",10,publisher2)
         entityManager.persist(book1)
         entityManager.persist(book2)
 

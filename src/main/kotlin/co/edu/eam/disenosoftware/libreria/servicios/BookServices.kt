@@ -31,4 +31,16 @@ class BookServices {
 
         bookRepository.create(book)
     }
+
+    fun returnBook(book:Book){
+        var bookById= bookRepository.find(book.code)
+
+        if ( bookById == null){
+            throw BusinessException("this book is not in the database")
+        }
+
+        bookById.stock= bookById.stock+1
+        bookRepository.update(book)
+
+    }
 }

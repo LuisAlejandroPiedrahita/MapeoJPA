@@ -21,12 +21,12 @@ class BookRepositoryTest {
     lateinit var entityManager: EntityManager
 
     @Test
-    fun testCreatePerson() {
+    fun testCreate() {
 
         val publisher = Publisher(1,"Santillana")
         entityManager.persist(publisher)
 
-        bookRepository.create(Book("1","EstrellasFeas","123",publisher))
+        bookRepository.create(Book("1","EstrellasFeas","123",10,publisher))
 
         val book = entityManager.find(Book::class.java,  "1")
         Assertions.assertNotNull(book)
@@ -41,7 +41,7 @@ class BookRepositoryTest {
         val publisher = Publisher(1,"Santillana")
         entityManager.persist(publisher)
 
-        entityManager.persist(Book("1","EstrellasFeas","123",publisher))
+        entityManager.persist(Book("1","EstrellasFeas","123",10,publisher))
 
         bookRepository.delete("3")
 
@@ -54,7 +54,7 @@ class BookRepositoryTest {
         val publisher = Publisher(1,"Santillana")
         entityManager.persist(publisher)
 
-        entityManager.persist(Book("1","EstrellasFeas","123",publisher))
+        entityManager.persist(Book("1","EstrellasFeas","123",10,publisher))
 
         val book = bookRepository.find("1")
 
@@ -67,7 +67,7 @@ class BookRepositoryTest {
         val publisher = Publisher(1,"Santillana")
         entityManager.persist(publisher)
 
-        entityManager.persist(Book("1","EstrellasFeas","123",publisher))
+        entityManager.persist(Book("1","EstrellasFeas","123",10,publisher))
         entityManager.flush()
 
         val book = entityManager.find(Book::class.java, "1")
@@ -89,10 +89,10 @@ class BookRepositoryTest {
         entityManager.persist(publisher)
         entityManager.persist(publisher2)
 
-        val book1 = Book("1","EstrellasFeas","123",publisher)
-        val book2 = Book("2","EstrellasLindas","456",publisher2)
-        val book3 = Book("3","EstrellasFeas","789",publisher)
-        val book4 = Book("4","EstrellasLindas","963",publisher2)
+        val book1 = Book("1","EstrellasFeas","123",10,publisher)
+        val book2 = Book("2","EstrellasLindas","456",10,publisher2)
+        val book3 = Book("3","EstrellasFeas","789",10,publisher)
+        val book4 = Book("4","EstrellasLindas","963",10,publisher2)
         entityManager.persist(book1)
         entityManager.persist(book2)
         entityManager.persist(book3)

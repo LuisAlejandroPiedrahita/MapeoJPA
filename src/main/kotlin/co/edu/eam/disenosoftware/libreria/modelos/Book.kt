@@ -23,6 +23,9 @@ data class Book(
     @Column(name = "book_isbn")
     var isbn: String,
 
+    @Column (name = "cantidad")
+    var stock : Int,
+
     @ManyToOne
     @JoinColumn(name = "publisher_id")
     val publisher: Publisher,

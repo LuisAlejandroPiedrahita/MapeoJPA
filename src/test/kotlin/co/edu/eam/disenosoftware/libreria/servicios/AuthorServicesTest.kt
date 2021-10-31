@@ -21,13 +21,29 @@ class AuthorServicesTest {
 
     @Test
     fun testCreateUserByCode() {
-        entityManager.persist(Author(1, "luis","gomez"))
+
+        val authorOne = Author(1, "luis","gomez")
+        entityManager.persist(authorOne)
+        val authorTwo= Author(1,"Beltran","Sandra")
 
         try {
-            authorServices.createAuthor(Author(1, "luis","gomez"))
+            authorServices.createAuthor(authorTwo)
             Assertions.fail()
         } catch (e: BusinessException) {
             Assertions.assertEquals("This Author already exists", e.message)
         }
+    }
+
+    @Test
+    fun createAuthorHappyPath(){
+        val authorOne = Author(1, "luis","gomez")
+        entityManager.persist(authorOne)
+        val authorTwo= Author(1,"Beltran","Sandra")
+        authorServices.createAuthor(authorTwo)
+
+        val author= entityManager.find(Author::class.java,authorTwo.id)
+        Assertions.assertNotNull(author)
+        Assertions.assertEquals("Sandra",author.name)
+        Assertions.assertEquals("Beltran",author.lastName)
     }
 }
