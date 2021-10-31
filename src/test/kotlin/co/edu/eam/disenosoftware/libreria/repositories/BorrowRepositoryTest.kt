@@ -1,9 +1,9 @@
 package co.edu.eam.disenosoftware.libreria.repositories
 
-import co.edu.eam.disenosoftware.libreria.modelos.User
-import co.edu.eam.disenosoftware.libreria.modelos.Borrow
-import co.edu.eam.disenosoftware.libreria.modelos.Book
-import co.edu.eam.disenosoftware.libreria.modelos.Publisher
+import co.edu.eam.disenosoftware.libreria.modelos.entities.User
+import co.edu.eam.disenosoftware.libreria.modelos.entities.Borrow
+import co.edu.eam.disenosoftware.libreria.modelos.entities.Book
+import co.edu.eam.disenosoftware.libreria.modelos.entities.Publisher
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
@@ -30,7 +30,7 @@ class BorrowRepositoryTest {
         val book = Book("1","EstrellasFeas","123",10,publisher)
         entityManager.persist(book)
 
-        val user = User("1", "luis","gomez")
+        val user = User("1", "luis","Gomez")
         entityManager.persist(user)
 
         val date = Date(2021,9,28)
@@ -41,8 +41,12 @@ class BorrowRepositoryTest {
         Assertions.assertNotNull(borrow)
         Assertions.assertEquals(1, borrow.id)
         Assertions.assertEquals(date, borrow.dateTime)
-        Assertions.assertEquals("EstrellasFeas", borrow.book.name)
-        Assertions.assertEquals("luis", borrow.user.name)
+
+        Assertions.assertEquals("EstrellasFeas", borrow.book?.name)
+        Assertions.assertEquals("123", borrow.book?.isbn)
+        Assertions.assertEquals("Santillana", borrow.book?.publisher?.name)
+        Assertions.assertEquals("Luis", borrow.user?.name)
+        Assertions.assertEquals("Gomez", borrow.user?.lastName)
     }
 
     @Test
@@ -142,6 +146,9 @@ class BorrowRepositoryTest {
 
         Assertions.assertEquals(1,prestamo1.size)
         Assertions.assertEquals(1,prestamo2.size)
+
+        prestamo1.forEach {Assertions.assertEquals(1,it.user?.identification) }
+        prestamo2.forEach {Assertions.assertEquals(2,it.user?.identification) }
     }
 
     @Test
@@ -171,5 +178,8 @@ class BorrowRepositoryTest {
 
         Assertions.assertEquals(1,prestamo1.size)
         Assertions.assertEquals(1,prestamo2.size)
+
+        prestamo1.forEach {Assertions.assertEquals("1",it.book?.code) }
+        prestamo2.forEach {Assertions.assertEquals("2",it.book?.code) }
     }
 }

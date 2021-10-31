@@ -1,10 +1,10 @@
 package co.edu.eam.disenosoftware.libreria.services
 
 import co.edu.eam.disenosoftware.libreria.exceptions.BusinessException
-import co.edu.eam.disenosoftware.libreria.modelos.Author
-import co.edu.eam.disenosoftware.libreria.modelos.AuthorBook
-import co.edu.eam.disenosoftware.libreria.modelos.Book
-import co.edu.eam.disenosoftware.libreria.modelos.Publisher
+import co.edu.eam.disenosoftware.libreria.modelos.entities.Author
+import co.edu.eam.disenosoftware.libreria.modelos.entities.AuthorBook
+import co.edu.eam.disenosoftware.libreria.modelos.entities.Book
+import co.edu.eam.disenosoftware.libreria.modelos.entities.Publisher
 import co.edu.eam.disenosoftware.libreria.servicios.AuthorBookServices
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test

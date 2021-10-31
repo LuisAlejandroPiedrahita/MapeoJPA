@@ -4,8 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
 import org.springframework.transaction.annotation.Transactional
 import javax.persistence.EntityManager
-import javax.persistence.Query
-import co.edu.eam.disenosoftware.libreria.modelos.Author
+import co.edu.eam.disenosoftware.libreria.modelos.entities.Author
 
 @Component
 @Transactional

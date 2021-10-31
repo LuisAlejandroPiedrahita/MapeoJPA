@@ -1,6 +1,6 @@
 package co.edu.eam.disenosoftware.libreria.repositories
 
-import co.edu.eam.disenosoftware.libreria.modelos.Author
+import co.edu.eam.disenosoftware.libreria.modelos.entities.Author
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired

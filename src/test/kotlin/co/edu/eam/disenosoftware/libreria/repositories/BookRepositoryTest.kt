@@ -1,7 +1,7 @@
 package co.edu.eam.disenosoftware.libreria.repositories
 
-import co.edu.eam.disenosoftware.libreria.modelos.Book
-import co.edu.eam.disenosoftware.libreria.modelos.Publisher
+import co.edu.eam.disenosoftware.libreria.modelos.entities.Book
+import co.edu.eam.disenosoftware.libreria.modelos.entities.Publisher
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
@@ -30,10 +30,10 @@ class BookRepositoryTest {
 
         val book = entityManager.find(Book::class.java,  "1")
         Assertions.assertNotNull(book)
-        Assertions.assertEquals("1", book.code)
         Assertions.assertEquals("EstrellasFeas", book.name)
         Assertions.assertEquals("123", book.isbn)
-        Assertions.assertEquals("Santillana", book.publisher.name)
+        Assertions.assertEquals("Santillana", book.publisher?.name)
+        Assertions.assertEquals(1, book.publisher?.code)
     }
 
     @Test
@@ -79,7 +79,7 @@ class BookRepositoryTest {
 
         val bookToAssert = entityManager.find(Book::class.java, "1")
         Assertions.assertEquals("EstrellasBonitas", bookToAssert.name)
-        Assertions.assertEquals("456", bookToAssert.isbn)
+        Assertions.assertEquals("123", bookToAssert.isbn)
     }
 
     @Test
@@ -103,5 +103,8 @@ class BookRepositoryTest {
 
         Assertions.assertEquals(2,libro.size)
         Assertions.assertEquals(2,libro2.size)
+
+        libro.forEach {Assertions.assertEquals("1",it.publisher?.code) }
+        libro2.forEach {Assertions.assertEquals("2",it.publisher?.code) }
     }
 }

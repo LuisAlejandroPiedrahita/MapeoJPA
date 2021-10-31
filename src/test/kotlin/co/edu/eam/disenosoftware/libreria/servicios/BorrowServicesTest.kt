@@ -1,10 +1,11 @@
 package co.edu.eam.disenosoftware.libreria.services
 
 import co.edu.eam.disenosoftware.libreria.exceptions.BusinessException
-import co.edu.eam.disenosoftware.libreria.modelos.Book
-import co.edu.eam.disenosoftware.libreria.modelos.Borrow
-import co.edu.eam.disenosoftware.libreria.modelos.Publisher
-import co.edu.eam.disenosoftware.libreria.modelos.User
+import co.edu.eam.disenosoftware.libreria.modelos.entities.Book
+import co.edu.eam.disenosoftware.libreria.modelos.entities.Borrow
+import co.edu.eam.disenosoftware.libreria.modelos.entities.Publisher
+import co.edu.eam.disenosoftware.libreria.modelos.entities.User
+import co.edu.eam.disenosoftware.libreria.modelos.request.BorrowRequest
 import co.edu.eam.disenosoftware.libreria.servicios.BorrowServices
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
@@ -33,10 +34,10 @@ class BorrowServiceTest {
         entityManager.persist(book)
         val user = User("111","Juan","Torres")
         entityManager.persist(user)
-        val borrow=Borrow(45,fecha,book,user)
+        val borrowRequest = BorrowRequest(45,book.code,user.identification)
 
         try {
-            borrowServices.createBorrow(borrow)
+            borrowServices.createBorrow(borrowRequest)
             Assertions.fail()
         }catch (e:BusinessException){
             Assertions.assertEquals("Only one copy of the book remains, therefore it cannot be loaned",e.message)
@@ -44,7 +45,7 @@ class BorrowServiceTest {
     }
 
     @Test
-    fun createBorrowUserHasFiveLoans(){
+    fun createBorrowUserHasFiveLoads(){
         val fecha = Date(2019,2,24)
         val publisher = Publisher(14,"Norma")
         entityManager.persist(publisher)
@@ -62,7 +63,7 @@ class BorrowServiceTest {
         entityManager.persist(borrowFour)
         val borrowFive = Borrow(49,fecha,book,user)
         entityManager.persist(borrowFive)
-        val borrowSix = Borrow(50,fecha,book,user)
+        val borrowSix = BorrowRequest(50,book.code,user.identification)
 
         try {
             borrowServices.createBorrow(borrowSix)
@@ -83,7 +84,7 @@ class BorrowServiceTest {
         entityManager.persist(user)
         val borrowOne = Borrow(45,fecha,book,user)
         entityManager.persist(borrowOne)
-        val borrowTwo  =Borrow(46,fecha,book,user)
+        val borrowTwo  = BorrowRequest(46,book.code,user.identification)
 
         try {
             borrowServices.createBorrow(borrowTwo)
@@ -106,7 +107,7 @@ class BorrowServiceTest {
         entityManager.persist(user)
         val borrowOne = Borrow(45,fecha,bookOne,user)
         entityManager.persist(borrowOne)
-        val borrowTwo = Borrow(46,fecha,bookTwo,user)
+        val borrowTwo = BorrowRequest(46,bookTwo.code,user.identification)
 
         borrowServices.createBorrow(borrowTwo)
         val borrow = entityManager.find(Borrow::class.java,borrowTwo.id)

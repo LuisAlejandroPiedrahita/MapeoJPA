@@ -1,6 +1,6 @@
 package co.edu.eam.disenosoftware.libreria.repositories
 
-import co.edu.eam.disenosoftware.libreria.modelos.Book
+import co.edu.eam.disenosoftware.libreria.modelos.entities.Book
 import org.springframework.beans.factory.annotation.Autowired
 import javax.persistence.EntityManager
 
@@ -12,7 +12,7 @@ class BookRepository {
         em.persist(book)
     }
 
-    fun find(id: String): Book? {
+    fun find(id: String?): Book? {
         return em.find(Book::class.java, id)
     }
 

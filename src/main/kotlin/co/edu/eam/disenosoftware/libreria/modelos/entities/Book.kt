@@ -1,4 +1,4 @@
-package co.edu.eam.disenosoftware.libreria.modelos
+package co.edu.eam.disenosoftware.libreria.modelos.entities
 
 import javax.persistence.Entity
 import javax.persistence.Table
@@ -15,7 +15,7 @@ data class Book(
 
     @Id
     @Column(name = "book_code")
-    val code: String,
+    var code: String,
 
     @Column(name = "book_name")
     var name: String,
@@ -28,6 +28,6 @@ data class Book(
 
     @ManyToOne
     @JoinColumn(name = "publisher_id")
-    val publisher: Publisher,
+    var publisher: Publisher,
 
-):Serializable
+    ):Serializable

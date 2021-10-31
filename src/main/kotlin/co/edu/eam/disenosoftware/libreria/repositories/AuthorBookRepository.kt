@@ -2,9 +2,9 @@ package co.edu.eam.disenosoftware.libreria.repositories
 
 import org.springframework.beans.factory.annotation.Autowired
 import javax.persistence.EntityManager
-import co.edu.eam.disenosoftware.libreria.modelos.AuthorBook
-import co.edu.eam.disenosoftware.libreria.modelos.Book
-import co.edu.eam.disenosoftware.libreria.modelos.Author
+import co.edu.eam.disenosoftware.libreria.modelos.entities.AuthorBook
+import co.edu.eam.disenosoftware.libreria.modelos.entities.Book
+import co.edu.eam.disenosoftware.libreria.modelos.entities.Author
 
 class AuthorBookRepository {
 
@@ -37,7 +37,7 @@ class AuthorBookRepository {
         return query.resultList as List<Book>
     }
 
-    fun findByBook(id: String): List<Author> {
+    fun findByBook(id: String?): List<Author> {
         val query = em.createQuery("SELECT authorBook.author FROM AuthorBook authorBook WHERE authorBook.book.code = :code_book")
         query.setParameter("code_book", id)
 

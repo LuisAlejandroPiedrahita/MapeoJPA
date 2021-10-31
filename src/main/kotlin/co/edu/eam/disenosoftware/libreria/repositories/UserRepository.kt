@@ -1,6 +1,6 @@
 package co.edu.eam.disenosoftware.libreria.repositories
 
-import co.edu.eam.disenosoftware.libreria.modelos.User
+import co.edu.eam.disenosoftware.libreria.modelos.entities.User
 import org.springframework.beans.factory.annotation.Autowired
 import javax.persistence.EntityManager
 
@@ -12,7 +12,7 @@ class UserRepository {
         em.persist(user)
     }
 
-    fun find(id: String): User? {
+    fun find(id: String?): User? {
         return em.find(User::class.java, id)
     }
 

@@ -1,12 +1,14 @@
 package co.edu.eam.disenosoftware.libreria.repositories
 
-import co.edu.eam.disenosoftware.libreria.modelos.*
+import co.edu.eam.disenosoftware.libreria.modelos.entities.Author
+import co.edu.eam.disenosoftware.libreria.modelos.entities.AuthorBook
+import co.edu.eam.disenosoftware.libreria.modelos.entities.Book
+import co.edu.eam.disenosoftware.libreria.modelos.entities.Publisher
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.transaction.annotation.Transactional
-import java.util.*
 import javax.persistence.EntityManager
 
 @SpringBootTest
@@ -27,17 +29,18 @@ class AuthorBookRepositoryTest {
         val book = Book("1","EstrellasFeas","123",10,publisher)
         entityManager.persist(book)
 
-        val author = Author(1, "luis","gomez")
+        val author = Author(1, "luis","Gomez")
         entityManager.persist(author)
 
         authorBookRepository.create(AuthorBook(1, book,author))
 
         val authorBook = entityManager.find(AuthorBook::class.java, 1)
         Assertions.assertNotNull(authorBook)
-        Assertions.assertEquals(1, authorBook.id)
-        Assertions.assertEquals("Santillana", authorBook.book.publisher.name)
-        Assertions.assertEquals("EstrellasFeas", authorBook.book.name)
-        Assertions.assertEquals("luis", authorBook.author.name)
+        Assertions.assertEquals("EstrellasFeas",authorBook.book.name)
+        Assertions.assertEquals("1",authorBook.book.isbn)
+        Assertions.assertEquals("Santillana",authorBook.book.publisher?.name)
+        Assertions.assertEquals("Luis",authorBook.author.name)
+        Assertions.assertEquals("Gomez",authorBook.author.lastName)
     }
 
     @Test

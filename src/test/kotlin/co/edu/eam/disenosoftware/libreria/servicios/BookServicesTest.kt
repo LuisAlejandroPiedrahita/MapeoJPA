@@ -1,8 +1,8 @@
 package co.edu.eam.disenosoftware.libreria.servicios
 
 import co.edu.eam.disenosoftware.libreria.exceptions.BusinessException
-import co.edu.eam.disenosoftware.libreria.modelos.Book
-import co.edu.eam.disenosoftware.libreria.modelos.Publisher
+import co.edu.eam.disenosoftware.libreria.modelos.entities.Book
+import co.edu.eam.disenosoftware.libreria.modelos.entities.Publisher
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
@@ -30,7 +30,7 @@ class BookServicesTest {
         val bookTwo = Book("123","Juego de tronos","666",11,publisher)
 
         try {
-            bookServices.createBook(bookTwo)
+            bookServices.createBook(bookTwo,11)
             Assertions.fail()
         }catch (e: BusinessException){
             Assertions.assertEquals("This book with this name already exist",e.message)
@@ -47,7 +47,7 @@ class BookServicesTest {
         val bookTwo = Book("123","Juego de tronos","666",11,publisher)
 
         try {
-            bookServices.createBook(bookTwo)
+            bookServices.createBook(bookTwo,11)
             Assertions.fail()
         } catch (e: BusinessException) {
             Assertions.assertEquals("This Book already exists", e.message)
@@ -63,7 +63,7 @@ class BookServicesTest {
         entityManager.persist(bookOne)
         val bookTwo = Book("123","Juego de tronos","666",11,publisher)
 
-        bookServices.createBook(bookTwo)
+        bookServices.createBook(bookTwo,11)
         val book= entityManager.find(Book::class.java,bookTwo.code)
         Assertions.assertNotNull(book)
         Assertions.assertEquals("Juego de tronos",book.name)

@@ -1,8 +1,7 @@
 package co.edu.eam.disenosoftware.libreria.repositories
 
-import co.edu.eam.disenosoftware.libreria.modelos.Book
-import co.edu.eam.disenosoftware.libreria.modelos.User
-import co.edu.eam.disenosoftware.libreria.modelos.Borrow
+import co.edu.eam.disenosoftware.libreria.modelos.entities.User
+import co.edu.eam.disenosoftware.libreria.modelos.entities.Borrow
 import org.springframework.beans.factory.annotation.Autowired
 import javax.persistence.EntityManager
 

@@ -1,7 +1,7 @@
 package co.edu.eam.disenosoftware.libreria.servicios
 
 import co.edu.eam.disenosoftware.libreria.exceptions.BusinessException
-import co.edu.eam.disenosoftware.libreria.modelos.AuthorBook
+import co.edu.eam.disenosoftware.libreria.modelos.entities.AuthorBook
 import co.edu.eam.disenosoftware.libreria.repositories.AuthorBookRepository
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service

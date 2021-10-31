@@ -1,4 +1,4 @@
-package co.edu.eam.disenosoftware.libreria.modelos
+package co.edu.eam.disenosoftware.libreria.modelos.entities
 
 import javax.persistence.Entity
 import javax.persistence.Table
@@ -25,4 +25,4 @@ data class AuthorBook(
     @JoinColumn(name = "author_id")
     val author: Author,
 
-):Serializable
+    ):Serializable
